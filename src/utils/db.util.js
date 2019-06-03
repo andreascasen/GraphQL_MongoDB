@@ -28,7 +28,7 @@ class DB {
 			return null
 		}
 	}
-	
+
 	async findById (collectionName, userId) {
 		try {
 			let collection = this.db.collection(collectionName)
