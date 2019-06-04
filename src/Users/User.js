@@ -1,4 +1,4 @@
-import { users } from './data'
+import { users } from '../data'
 
 const User = {
 	findById: userId => {

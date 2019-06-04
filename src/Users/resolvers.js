@@ -1,30 +1,33 @@
-import { isValidString, isValidArray } from '../utils/validate'
+import {
+	// isValidArray,
+	isValidString
+} from '../utils/validate'
 import User from './User'
+// import List from '../Lists/List'
 
 const userResolvers = {
-	user: async (parent, args, context, info) => {
-		const { userId = '', userEmail = '' } = args
-		if (!isValidString(userId) && !isValidString(userEmail)) {
-			throw new Error('Invalid arguments')
-		}
+	Query: {
+		user: async (parent, args, context, info) => {
+			const { userId = null } = args
+			if (!isValidString(userId, 1)) {
+				throw new Error('Invalid arguments')
+			}
 
-		if (isValidString(userId)) {
-			return User.findById(userId)
+			return context.data.users.find(singleUser => singleUser.id === userId)
+		},
+		users: async (parent, args, context, info) => {
+			return context.data.users
 		}
-
-		return User.findByEmail(userEmail)
 	},
-	users: async (parent, args, context, info) => {
-		const { userIds = [], userEmails = [] } = args
-		if (!isValidArray(userIds, 1) && !isValidArray(userEmails, 1)) {
-			throw new Error('Invalid arguments')
-		}
-
-		if (userIds.length > 0) {
-			return User.filterById(userIds)
-		}
-
-		return User.filterByEmail(userEmails)
+	User: {
+		// lists: (parent, args, context, info) => {
+		// 	console.log('Parent => ', parent)
+		// 	let allLists = List.find()
+		// 	if (allLists.length === 0) {
+		// 		return []
+		// 	}
+		// 	return allLists
+		// }
 	}
 }
 

@@ -1,4 +1,9 @@
 const listTypeDef = `
+	extend type Query {
+		list: List!
+		lists: [List!]!
+	}
+
 	type List {
 		id: ID!
 		name: String!

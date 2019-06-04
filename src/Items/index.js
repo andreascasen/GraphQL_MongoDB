@@ -1,5 +1,3 @@
 import typeDef from './typeDef'
 
-export default {
-	itemTypes: typeDef
-}
+export const itemTypes = typeDef

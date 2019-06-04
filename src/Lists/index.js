@@ -1,5 +1,5 @@
 import typeDef from './typeDef'
+import resolvers from './resolvers'
 
-export default {
-	listTypes: typeDef
-}
+export const listResolvers = resolvers
+export const listTypes = typeDef

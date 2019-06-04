@@ -1,7 +1,5 @@
 import typeDef from './typeDef'
 import resolvers from './resolvers'
 
-export default {
-	userTypes: typeDef,
-	userResolvers: resolvers
-}
+export const userTypes = typeDef
+export const userResolvers = resolvers
