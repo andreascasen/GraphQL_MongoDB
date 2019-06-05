@@ -3,8 +3,8 @@ import { ApolloServer, makeExecutableSchema } from 'apollo-server'
 // import DB from './utils/db.util'
 // import { DB_URI } from './env'
 
-import { userTypes, userResolvers } from './Users/'
-import { listTypes, listResolvers } from './Lists'
+import { userTypes, userResolvers, User } from './Users/'
+import { listTypes, listResolvers, List } from './Lists'
 import { itemTypes } from './Items'
 import { rootTypes } from './root.typedefs'
 
@@ -24,8 +24,12 @@ let schema = makeExecutableSchema({
 			...userResolvers.Query,
 			...listResolvers.Query
 		},
-		...userResolvers.User,
-		...listResolvers.List
+		User: {
+			...userResolvers.User
+		},
+		List: {
+			...listResolvers.List
+		}
 	}
 })
 
@@ -33,7 +37,9 @@ const server = new ApolloServer({
 	schema,
 	context: async ({ req }) => ({
 		token: req.headers.authorization,
-		data: data
+		data: data,
+		user: User,
+		list: List
 	})
 })
 

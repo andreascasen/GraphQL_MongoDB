@@ -10,6 +10,10 @@ const userTypeDef = `
 		lists: [List!]!
 		items: [Item!]!
 	}
+
+	input UserSearchInput {
+		id: ID!
+	}
 `
 
 export default userTypeDef

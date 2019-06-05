@@ -2,7 +2,6 @@ import {
 	// isValidArray,
 	isValidString
 } from '../utils/validate'
-import User from './User'
 // import List from '../Lists/List'
 
 const userResolvers = {
@@ -20,6 +19,17 @@ const userResolvers = {
 		}
 	},
 	User: {
+		lists: async (parent, args, ctx, info) => {
+			const userId = parent.id
+			return ctx.data.lists.filter(singleList => {
+				if (singleList.owner === userId) {
+					return true
+				}
+
+				let userFound = singleList.users.find(singleUserId => singleUserId === userId)
+				return userFound !== undefined
+			})
+		}
 		// lists: (parent, args, context, info) => {
 		// 	console.log('Parent => ', parent)
 		// 	let allLists = List.find()
