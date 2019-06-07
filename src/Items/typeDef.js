@@ -5,6 +5,9 @@ const itemTypeDef = `
 
 	extend type Mutation {
 		newItem(item: ItemInput): Item
+		editItem(itemId: ID!, data: EditItemInput!): Item
+		editItems(itemIds: [ID!]!, data: EditItemsInput!): [Item!]!
+		deleteItems(itemIds: [ID!]!, listId: ID!): [Item!]!
 	}
 
 	type Item {
@@ -22,6 +25,16 @@ const itemTypeDef = `
 		qty: Int!
 		prio: Int!
 		list: ID!
+	}
+
+	input EditItemInput {
+		name: String
+		qty: Int
+		prio: Int
+	}
+	input EditItemsInput {
+		qty: Int
+		prio: Int
 	}
 `
 
