@@ -29,15 +29,10 @@ const userResolvers = {
 				let userFound = singleList.users.find(singleUserId => singleUserId === userId)
 				return userFound !== undefined
 			})
+		},
+		items: async (parent, args, ctx, info) => {
+			return ctx.data.items.filter(singleItem => singleItem.user === parent.id)
 		}
-		// lists: (parent, args, context, info) => {
-		// 	console.log('Parent => ', parent)
-		// 	let allLists = List.find()
-		// 	if (allLists.length === 0) {
-		// 		return []
-		// 	}
-		// 	return allLists
-		// }
 	}
 }
 

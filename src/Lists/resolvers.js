@@ -15,22 +15,18 @@ const listResolvers = {
 			return ownerFound
 		},
 		users: async (parent, args, ctx, info) => {
-			let userIds = parent.users
-			let ownerId = parent.owner
 			let users = ctx.data.users.filter(singleUser => {
-				if (singleUser.id === ownerId) {
+				if (singleUser.id === parent.owner) {
 					return true
 				}
-
-				userIds.forEach(singleUserId => {
-					if (singleUserId === singleUser.id) {
-						return true
-					}
-				})
-
-				return false
+				let foundUser = parent.users.findIndex(listUser => listUser === singleUser.id)
+				return foundUser !== -1
 			})
 			return users
+		},
+		items: async (parent, args, ctx, info) => {
+			let listItems = ctx.data.items.filter(singleItem => singleItem.list === parent.id)
+			return listItems
 		}
 	}
 }

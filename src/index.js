@@ -5,7 +5,7 @@ import { ApolloServer, makeExecutableSchema } from 'apollo-server'
 
 import { userTypes, userResolvers, User } from './Users/'
 import { listTypes, listResolvers, List } from './Lists'
-import { itemTypes } from './Items'
+import { itemTypes, itemResolvers } from './Items'
 import { rootTypes } from './root.typedefs'
 
 import data from './data'
@@ -22,14 +22,15 @@ let schema = makeExecutableSchema({
 	resolvers: {
 		Query: {
 			...userResolvers.Query,
-			...listResolvers.Query
+			...listResolvers.Query,
+			...itemResolvers.Query
 		},
-		User: {
-			...userResolvers.User
+		Mutation: {
+			...itemResolvers.Mutation
 		},
-		List: {
-			...listResolvers.List
-		}
+		User: userResolvers.User,
+		List: listResolvers.List,
+		Item: itemResolvers.Item
 	}
 })
 

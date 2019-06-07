@@ -1,6 +1,7 @@
 export const rootTypes = `
 	schema {
-		query: Query
+		query: Query,
+		mutation: Mutation
 	}
 
 	type Query {
